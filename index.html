@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    /* set the CSS */
+    
+    body {
+        font: 12px Arial;
+    }
+    
+    path {
+        stroke: steelblue;
+        stroke-width: 1;
+        fill: none;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+</style>
+
+<script src="d3.v3.min.js"></script>
+<script type="text/javascript" src="alasql.min.js"></script>
+<script type="text/javascript" src="chartFunctions.js"></script>
+
+<script>
+    
+    //Defining the data. If the input is in the form of CSV/TSV then it will have to be serialized into a jsonArray first.
+    
+    var data = [{
+            date: '16-DEC-90',
+            sample_size: 20
+    }, {
+            date: '17-DEC-90',
+            sample_size: 25
+    }, {
+            date: '18-DEC-90',
+            sample_size: 30
+    },
+        {
+            date: '19-DEC-90',
+            sample_size: 5
+    }];
+
+    //SQL Query that will filter the required query. 
+    //Validate your SQL at http://alasql.org/codex/.
+    var alaSqlQuery = "SELECT date,sample_size FROM ? \
+	WHERE sample_size>1";
+
+    query_function(data, alaSqlQuery, "#chartDivId", "Date", "Count");
+    
+</script>
+
+<body>
+    <div id="chartDivId"></div>
+</body>
